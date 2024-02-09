@@ -616,11 +616,11 @@ if __name__ == "__main__":
             outs, errs = rtl433.communicate(timeout=5)
         except subprocess.TimeoutExpired:
             outs = None
-        log_message('rtl_433 is waiting 30 seconds for packets')
+        log_message('rtl_433 is waiting 60 seconds for packets')
         if outs is not None:
             log_message(outs)
 
-        sleep(30)
+        sleep(60)
         rtl433.kill()
         rtl433.wait();
 
