@@ -603,9 +603,23 @@ if __name__ == "__main__":
         shutdown(0, 0)
         sleep(5)
 
-        log_message('Running rtl_433 for 20 seconds...')
+        # log_message('Running rtl_433 for 20 seconds...')
+        # rtl433 = subprocess.Popen(rtl433_cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, close_fds=True, universal_newlines=True)
+
+        log_message('Trying to start rtl_433: {}'.format(' '.join(rtl433_cmd)))
+        # start the rtlamr program.
         rtl433 = subprocess.Popen(rtl433_cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, close_fds=True, universal_newlines=True)
-        sleep(20)
+        log_message('rtl_433 started with PID {}'.format(rtlamr.pid))
+
+        try:
+            outs, errs = rtl433.communicate(timeout=5)
+        except subprocess.TimeoutExpired:
+            outs = None
+        log_message('rtl_433 is waiting 30 seconds for packets')
+        if outs is not None:
+            log_message(outs)
+
+        sleep(30)
         rtl433.kill()
         rtl433.wait();
 
