@@ -490,7 +490,7 @@ if __name__ == "__main__":
     if not external_rtl_tcp:
         rtltcp_cmd = ['/usr/bin/rtl_tcp'] + [usb_device_index] + rtltcp_custom
     rtlamr_cmd = ['/usr/bin/rtlamr', '-msgtype={}'.format(','.join(protocols)), '-format=json', '-filterid={}'.format(','.join(meters.keys()))] + rtlamr_custom
-    rtl433_cmd = ['/usr/bin/rtl_433', '-d', 'rtl_tcp://192.168.2.98:1235', '-R', '0', '-R', '40', '-F', 'mqtt://' + config['mqtt']['host'] + ':' + config['mqtt']['port'] + ',user=meters,pass=meters,devices=rtl_433[/model][/id]']
+    rtl433_cmd = ['/usr/bin/rtl_433', '-d', 'rtl_tcp://192.168.2.98:1235', '-R', '0', '-R', '40', '-F', 'mqtt://' + config['mqtt']['host'] + ':' + str(config['mqtt']['port']) + ',user=meters,pass=meters,devices=rtl_433[/model][/id]']
     #rtl433_cmd = ['/usr/bin/rtl_433', '-c', '/var/lib/rtl_433.conf']
     #################################################################
 
