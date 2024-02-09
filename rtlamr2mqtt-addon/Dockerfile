@@ -4,7 +4,7 @@ WORKDIR /go/src/app
 
 RUN go install github.com/bemasher/rtlamr@latest \
     && apt-get update \
-    && apt-get install -y libusb-1.0-0-dev build-essential git cmake \
+    && apt-get install -y libusb-1.0-0-dev build-essential git cmak rtl-433 \
     && git clone https://git.osmocom.org/rtl-sdr.git \
     && cd rtl-sdr \
     && mkdir build && cd build \
@@ -17,6 +17,8 @@ FROM python:3.10-slim
 COPY --from=go-builder /usr/local/lib/librtl* /lib/
 COPY --from=go-builder /go/bin/rtlamr* /usr/bin/
 COPY --from=go-builder /usr/local/bin/rtl* /usr/bin/
+COPY --from=go-builder /usr/bin/rtl_433 /usr/bin/
+COPY --from=go-builder /usr/share/doc/rtl-433/* /usr/share/doc/rtl-433/
 COPY ./rtlamr2mqtt.py /usr/bin
 COPY ./requirements.txt /tmp
 COPY ./sdl_ids.txt /var/lib/

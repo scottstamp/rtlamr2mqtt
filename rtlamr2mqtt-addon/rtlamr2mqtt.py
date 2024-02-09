@@ -490,6 +490,7 @@ if __name__ == "__main__":
     if not external_rtl_tcp:
         rtltcp_cmd = ['/usr/bin/rtl_tcp'] + [usb_device_index] + rtltcp_custom
     rtlamr_cmd = ['/usr/bin/rtlamr', '-msgtype={}'.format(','.join(protocols)), '-format=json', '-filterid={}'.format(','.join(meters.keys()))] + rtlamr_custom
+    rtl433_cmd = ['/usr/bin/rtl_433', '-d rtl_tcp://192.168.2.98:1235', '-R 0', '-R 40', '-F mqtt://127.0.0.1:1883,user=meters,pass=meters,devices=rtl_433[/model][/id]']
     #################################################################
 
     # Main loop
@@ -600,5 +601,13 @@ if __name__ == "__main__":
         log_message('Sleep_for defined, time to sleep!')
         log_message('Terminating all subprocess...')
         shutdown(0, 0)
+        sleep(5)
+
+        log_message('Running rtl_433 for 20 seconds...')
+        rtl433 = subprocess.Popen(rtl443_cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, close_fds=True, universal_newlines=True)
+        sleep(20)
+        rtl433.kill()
+        rtl433.wait();
+
         log_message('Sleeping for {} seconds, see you later...'.format(config['general']['sleep_for']))
         sleep(config['general']['sleep_for'])
