@@ -22,6 +22,7 @@ COPY --from=go-builder /usr/local/bin/rtl* /usr/bin/
 COPY ./rtlamr2mqtt.py /usr/bin
 COPY ./requirements.txt /tmp
 COPY ./sdl_ids.txt /var/lib/
+COPY ./rtl_433.conf /var/lib/
 
 RUN apt-get update \
     && apt-get install -o Dpkg::Options::="--force-confnew" -y \
