@@ -604,7 +604,7 @@ if __name__ == "__main__":
         sleep(5)
 
         log_message('Running rtl_433 for 20 seconds...')
-        rtl433 = subprocess.Popen(rtl443_cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, close_fds=True, universal_newlines=True)
+        rtl433 = subprocess.Popen(rtl433_cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, close_fds=True, universal_newlines=True)
         sleep(20)
         rtl433.kill()
         rtl433.wait();
