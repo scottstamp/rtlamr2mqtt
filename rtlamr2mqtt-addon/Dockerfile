@@ -4,7 +4,7 @@ WORKDIR /go/src/app
 
 RUN go install github.com/bemasher/rtlamr@latest \
     && apt-get update \
-    && apt-get install -y libusb-1.0-0-dev build-essential git cmak rtl-433 \
+    && apt-get install -y libusb-1.0-0-dev build-essential git cmake rtl-433 \
     && git clone https://git.osmocom.org/rtl-sdr.git \
     && cd rtl-sdr \
     && mkdir build && cd build \
