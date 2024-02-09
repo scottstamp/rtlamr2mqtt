@@ -602,7 +602,7 @@ if __name__ == "__main__":
         log_message('Sleep_for defined, time to sleep!')
         log_message('Terminating all subprocess...')
         shutdown(0, 0)
-        sleep(5)
+        sleep(30)
 
         # log_message('Running rtl_433 for 20 seconds...')
         # rtl433 = subprocess.Popen(rtl433_cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, close_fds=True, universal_newlines=True)
